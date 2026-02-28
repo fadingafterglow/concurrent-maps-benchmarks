@@ -1,12 +1,12 @@
-package ua.edu.ukma.generators.integer;
+package ua.edu.ukma.generators.keys.integer;
 
-import ua.edu.ukma.generators.KeyGenerator;
+import ua.edu.ukma.generators.Generator;
 
 public class IntegerKeyGeneratorsFactory {
 
     private IntegerKeyGeneratorsFactory() {}
 
-    public static KeyGenerator<Integer> createIntegerKeyGenerator(IntegerKeyDistribution distribution, int numberOfKeys, int range, long seed) {
+    public static Generator<Integer> createIntegerKeyGenerator(ua.edu.ukma.generators.keys.integer.IntegerKeyDistribution distribution, int numberOfKeys, int range, long seed) {
         return switch (distribution) {
             case UNIFORM -> new UniformIntegerKeyGenerator(numberOfKeys, range, seed);
             case SEQUENTIAL -> new SequentialIntegerKeyGenerator(numberOfKeys, range);

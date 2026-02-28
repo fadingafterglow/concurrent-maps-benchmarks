@@ -1,11 +1,11 @@
-package ua.edu.ukma.generators.integer;
+package ua.edu.ukma.generators.keys.integer;
 
-import ua.edu.ukma.generators.AbstractPrecomputedKeyGenerator;
+import ua.edu.ukma.generators.AbstractPrecomputedGenerator;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class ZipfIntegerKeyGenerator extends AbstractPrecomputedKeyGenerator<Integer> {
+public class ZipfIntegerKeyGenerator extends AbstractPrecomputedGenerator<Integer> {
 
     public ZipfIntegerKeyGenerator(int numberOfKeys, int range, double s, long seed) {
         super(computeKeys(numberOfKeys, range, s, seed));

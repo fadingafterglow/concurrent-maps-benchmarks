@@ -1,10 +1,10 @@
-package ua.edu.ukma.generators.integer;
+package ua.edu.ukma.generators.keys.integer;
 
-import ua.edu.ukma.generators.AbstractPrecomputedKeyGenerator;
+import ua.edu.ukma.generators.AbstractPrecomputedGenerator;
 
 import java.util.Random;
 
-public class UniformIntegerKeyGenerator extends AbstractPrecomputedKeyGenerator<Integer> {
+public class UniformIntegerKeyGenerator extends AbstractPrecomputedGenerator<Integer> {
 
     public UniformIntegerKeyGenerator(int numberOfKeys, int range, long seed) {
         super(computeKeys(numberOfKeys, range, seed));

@@ -1,4 +1,4 @@
-package ua.edu.ukma.generators.integer;
+package ua.edu.ukma.generators.keys.integer;
 
 public enum IntegerKeyDistribution {
     UNIFORM,

@@ -1,10 +1,10 @@
-package ua.edu.ukma.generators.integer;
+package ua.edu.ukma.generators.keys.integer;
 
-import ua.edu.ukma.generators.AbstractPrecomputedKeyGenerator;
+import ua.edu.ukma.generators.AbstractPrecomputedGenerator;
 
 import java.util.Random;
 
-public class HotspotIntegerKeyGenerator extends AbstractPrecomputedKeyGenerator<Integer> {
+public class HotspotIntegerKeyGenerator extends AbstractPrecomputedGenerator<Integer> {
 
     public HotspotIntegerKeyGenerator(int numberOfKeys, int range, double hotSpotProbability, long seed) {
         super(computeKeys(numberOfKeys, range, hotSpotProbability, seed));

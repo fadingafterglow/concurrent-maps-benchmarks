@@ -1,8 +1,8 @@
-package ua.edu.ukma.generators.integer;
+package ua.edu.ukma.generators.keys.integer;
 
-import ua.edu.ukma.generators.AbstractPrecomputedKeyGenerator;
+import ua.edu.ukma.generators.AbstractPrecomputedGenerator;
 
-public class SequentialIntegerKeyGenerator extends AbstractPrecomputedKeyGenerator<Integer> {
+public class SequentialIntegerKeyGenerator extends AbstractPrecomputedGenerator<Integer> {
 
     public SequentialIntegerKeyGenerator(int numberOfKeys, int range) {
         super(computeKeys(numberOfKeys, range));
