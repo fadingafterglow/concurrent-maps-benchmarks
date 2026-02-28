@@ -1,8 +1,8 @@
-package ua.edu.ukma.generators;
+package ua.edu.ukma.generators.integer;
+
+import ua.edu.ukma.generators.AbstractPrecomputedKeyGenerator;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class ZipfIntegerKeyGenerator extends AbstractPrecomputedKeyGenerator<Integer> {

@@ -5,7 +5,7 @@ public abstract class AbstractPrecomputedKeyGenerator<K> implements KeyGenerator
     private final K[] keys;
     private int idx;
 
-    AbstractPrecomputedKeyGenerator(K[] keys) {
+    public AbstractPrecomputedKeyGenerator(K[] keys) {
         this.keys = keys;
     }
 
