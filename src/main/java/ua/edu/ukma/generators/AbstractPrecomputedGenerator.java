@@ -5,7 +5,7 @@ public abstract class AbstractPrecomputedGenerator<E> implements Generator<E> {
     private final E[] elements;
     private int idx;
 
-    public AbstractPrecomputedGenerator(E[] elements) {
+    protected AbstractPrecomputedGenerator(E[] elements) {
         this.elements = elements;
     }
 

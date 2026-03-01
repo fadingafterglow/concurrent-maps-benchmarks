@@ -20,6 +20,7 @@ public class IntegerKeysMixedOperationsBenchmark {
 
     private static final int PREGENERATION_SIZE = 1_000_000;
     private static final int DISTRIBUTION_ACCURATE_PREFILL_ATTEMPTS = 5;
+    private static final int VALUES_POOL_SIZE = 50;
 
     @Param
     private ConcurrentMapType mapType;
@@ -90,15 +91,17 @@ public class IntegerKeysMixedOperationsBenchmark {
 
         @Setup(Level.Iteration)
         public void setupIteration(IntegerKeysMixedOperationsBenchmark benchmark) {
-            long seed;
+            long keySeed;
+            long opSeed;
             synchronized (benchmark) {
-                seed = benchmark.random.nextLong();
+                keySeed = benchmark.random.nextLong();
+                opSeed = benchmark.random.nextLong();
             }
             keyGenerator = IntegerKeyGeneratorsFactory
-                    .createIntegerKeyGenerator(benchmark.keyDistribution, PREGENERATION_SIZE, benchmark.keyRange, seed);
+                    .createIntegerKeyGenerator(benchmark.keyDistribution, PREGENERATION_SIZE, benchmark.keyRange, keySeed);
             double[] operationProbabilities = Utils.parseOperationMix(benchmark.operationMix);
-            operationGenerator = new OperationGenerator(PREGENERATION_SIZE, operationProbabilities[0], operationProbabilities[1], seed);
-            valueGenerator = new ValueGenerator(10);
+            operationGenerator = new OperationGenerator(PREGENERATION_SIZE, operationProbabilities[0], operationProbabilities[1], opSeed);
+            valueGenerator = new ValueGenerator(VALUES_POOL_SIZE);
         }
     }
 
