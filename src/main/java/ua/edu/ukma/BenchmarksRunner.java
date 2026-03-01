@@ -15,7 +15,7 @@ public class BenchmarksRunner {
                     .forks(3)
                     .threads(threads)
                     .shouldDoGC(true)
-//                    .param("mapType", "SYNCHRONIZED_HASH_MAP")
+//                    .param("mapType", "SYNCHRONIZED_HASH_MAP", "RW_SYNCHRONIZED_HASH_MAP")
 //                    .param("operationMix", "95:3")
 //                    .param("keyDistribution", "UNIFORM")
 //                    .param("keyRange", "1000000")
