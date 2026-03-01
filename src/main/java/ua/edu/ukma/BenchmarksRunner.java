@@ -7,6 +7,8 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 public class BenchmarksRunner {
 
+    private static final int[] THREAD_COUNTS = {1, 4, 8, 16, 32};
+
     public static void main(String[] args) throws RunnerException {
         Options baseOpts = new OptionsBuilder()
                 .forks(3)
@@ -14,20 +16,17 @@ public class BenchmarksRunner {
                 .jvmArgsAppend("-Xms512m", "-Xmx8g")
                 .build();
         //runMixed(baseOpts);
-        runGrouped(baseOpts);
+        //runGrouped(baseOpts);
+        runFill(baseOpts);
     }
 
     private static void runMixed(Options baseOpts) throws RunnerException {
-        for (int threads : new int[]{1, 4, 8, 16, 32}) {
+        for (int threads : THREAD_COUNTS) {
             Options opt = new OptionsBuilder()
                     .parent(baseOpts)
                     .include("ua.edu.ukma.benchmarks.*MixedOperations*")
                     .result(threads + "-threads-results.csv")
                     .threads(threads)
-//                    .param("mapType", "SYNCHRONIZED_HASH_MAP", "RW_SYNCHRONIZED_HASH_MAP")
-//                    .param("operationMix", "95:3")
-//                    .param("keyDistribution", "UNIFORM")
-//                    .param("keyRange", "1000000")
                     .build();
             new Runner(opt).run();
         }
@@ -39,8 +38,25 @@ public class BenchmarksRunner {
                 .include("ua.edu.ukma.benchmarks.*GroupedOperations*")
                 .result("grouped-results.csv")
                 .threads(16)
-//                .param("keyDistribution", "UNIFORM")
-//                .param("keyRange", "1000000")
+                .build();
+        new Runner(opt).run();
+    }
+
+    private static void runFill(Options baseOpts) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .parent(baseOpts)
+                .include("ua.edu.ukma.benchmarks.*Fill*")
+                .result("warm-fill-results.csv")
+                .build();
+        new Runner(opt).run();
+
+        opt = new OptionsBuilder()
+                .parent(baseOpts)
+                .include("ua.edu.ukma.benchmarks.*Fill*")
+                .result("cold-fill-results.csv")
+                .forks(15)
+                .warmupIterations(0)
+                .measurementIterations(1)
                 .build();
         new Runner(opt).run();
     }
