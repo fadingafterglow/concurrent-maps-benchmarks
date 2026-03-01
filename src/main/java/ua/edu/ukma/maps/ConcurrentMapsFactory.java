@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ConcurrentMapsFactory {
 
-    private  ConcurrentMapsFactory() {}
+    private ConcurrentMapsFactory() {}
 
     public static <K extends Comparable<K>, V> Map<K, V> createConcurrentMap(ConcurrentMapType type, int concurrencyLevel) {
         return switch (type) {
