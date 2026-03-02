@@ -4,6 +4,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import ua.edu.ukma.benchmarks.*;
 
 public class BenchmarksRunner {
 
@@ -15,46 +16,47 @@ public class BenchmarksRunner {
                 .shouldDoGC(true)
                 .jvmArgsAppend("-Xms512m", "-Xmx8g")
                 .build();
-        //runMixed(baseOpts);
-        //runGrouped(baseOpts);
-        //runFill(baseOpts);
-        runMemory(baseOpts);
+        //runIntegerKeysMixedOperationsBenchmark(baseOpts);
+        //runIntegerKeysGroupedOperationsBenchmark(baseOpts);
+        //runIntegerKeysFillBenchmark(baseOpts);
+        //runMemoryFootprintBenchmark(baseOpts);
+        runEmailKeysMixedOperationsBenchmark(baseOpts);
     }
 
-    private static void runMixed(Options baseOpts) throws RunnerException {
+    private static void runIntegerKeysMixedOperationsBenchmark(Options baseOpts) throws RunnerException {
         for (int threads : THREAD_COUNTS) {
             Options opt = new OptionsBuilder()
                     .parent(baseOpts)
-                    .include("ua.edu.ukma.benchmarks.*MixedOperations*")
-                    .result(threads + "-threads-results.csv")
+                    .include(IntegerKeysMixedOperationsBenchmark.class.getName())
+                    .result("int-mixed-" + threads + "-threads-results.csv")
                     .threads(threads)
                     .build();
             new Runner(opt).run();
         }
     }
 
-    private static void runGrouped(Options baseOpts) throws RunnerException {
+    private static void runIntegerKeysGroupedOperationsBenchmark(Options baseOpts) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .parent(baseOpts)
-                .include("ua.edu.ukma.benchmarks.*GroupedOperations*")
-                .result("grouped-results.csv")
+                .include(IntegerKeysGroupedOperationsBenchmark.class.getName())
+                .result("int-grouped-results.csv")
                 .threads(16)
                 .build();
         new Runner(opt).run();
     }
 
-    private static void runFill(Options baseOpts) throws RunnerException {
+    private static void runIntegerKeysFillBenchmark(Options baseOpts) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .parent(baseOpts)
-                .include("ua.edu.ukma.benchmarks.*Fill*")
-                .result("warm-fill-results.csv")
+                .include(IntegerKeysFillBenchmark.class.getName())
+                .result("int-warm-fill-results.csv")
                 .build();
         new Runner(opt).run();
 
         opt = new OptionsBuilder()
                 .parent(baseOpts)
-                .include("ua.edu.ukma.benchmarks.*Fill*")
-                .result("cold-fill-results.csv")
+                .include(IntegerKeysFillBenchmark.class.getName())
+                .result("int-cold-fill-results.csv")
                 .forks(15)
                 .warmupIterations(0)
                 .measurementIterations(1)
@@ -62,13 +64,25 @@ public class BenchmarksRunner {
         new Runner(opt).run();
     }
 
-    private static void runMemory(Options baseOpts) throws RunnerException {
+    private static void runMemoryFootprintBenchmark(Options baseOpts) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .parent(baseOpts)
-                .include("ua.edu.ukma.benchmarks.*Memory*")
+                .include(MemoryFootprintBenchmark.class.getName())
                 .result("memory-results.csv")
                 .forks(1)
                 .build();
         new Runner(opt).run();
+    }
+
+    private static void runEmailKeysMixedOperationsBenchmark(Options baseOpts) throws RunnerException {
+        for (int threads : THREAD_COUNTS) {
+            Options opt = new OptionsBuilder()
+                    .parent(baseOpts)
+                    .include(EmailKeysMixedOperationsBenchmark.class.getName())
+                    .result("email-mixed-" + threads + "-threads-results.csv")
+                    .threads(threads)
+                    .build();
+            new Runner(opt).run();
+        }
     }
 }
