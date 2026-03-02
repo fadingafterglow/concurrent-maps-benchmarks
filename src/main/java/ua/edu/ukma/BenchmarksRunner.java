@@ -17,7 +17,8 @@ public class BenchmarksRunner {
                 .build();
         //runMixed(baseOpts);
         //runGrouped(baseOpts);
-        runFill(baseOpts);
+        //runFill(baseOpts);
+        runMemory(baseOpts);
     }
 
     private static void runMixed(Options baseOpts) throws RunnerException {
@@ -57,6 +58,16 @@ public class BenchmarksRunner {
                 .forks(15)
                 .warmupIterations(0)
                 .measurementIterations(1)
+                .build();
+        new Runner(opt).run();
+    }
+
+    private static void runMemory(Options baseOpts) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .parent(baseOpts)
+                .include("ua.edu.ukma.benchmarks.*Memory*")
+                .result("memory-results.csv")
+                .forks(1)
                 .build();
         new Runner(opt).run();
     }

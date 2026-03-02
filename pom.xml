@@ -47,6 +47,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <version>${jmh.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>${jol.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
             <version>${jmh.version}</version>
@@ -62,6 +67,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jmh.version>1.37</jmh.version>
+        <jol.version>0.17</jol.version>
         <javac.target>21</javac.target>
         <uberjar.name>benchmarks</uberjar.name>
     </properties>
