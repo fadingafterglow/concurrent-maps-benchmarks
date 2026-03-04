@@ -16,10 +16,10 @@ public class BenchmarksRunner {
                 .shouldDoGC(true)
                 .jvmArgsAppend("-Xms512m", "-Xmx8g")
                 .build();
-        //runIntegerKeysMixedOperationsBenchmark(baseOpts);
-        //runIntegerKeysGroupedOperationsBenchmark(baseOpts);
-        //runIntegerKeysFillBenchmark(baseOpts);
-        //runMemoryFootprintBenchmark(baseOpts);
+        runIntegerKeysMixedOperationsBenchmark(baseOpts);
+        runIntegerKeysGroupedOperationsBenchmark(baseOpts);
+        runIntegerKeysFillBenchmark(baseOpts);
+        runMemoryFootprintBenchmark(baseOpts);
         runEmailKeysMixedOperationsBenchmark(baseOpts);
     }
 
